@@ -1,20 +1,28 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+![CF](http://i.imgur.com/7v5ASc8.png) Hue-out-there
+==============================================
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+## 401 JavaScript N12 - Midterm Project
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+### Author: Alistair Blake, Jessica Elliott, Karl Polintan
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### Links and Resources
+* [repo](https://dev.azure.com/consultations/hue_out_there/_git/hue_out_there?path=%2FREADME.md&version=GBmaster)
+* [travis]('')
+
+### Modules
+#### `app.js`
+#### `main.js`
+
+### Exported Values and Methods
+* MONGODB_URI
+* PORT=3000
+
+### Usage Notes and Examples
+*
+
+
+#### Tests
+* To run tests, please use the `npm run test` command.
+* What assertions were made?
+* What assertions need to be / should be made?
