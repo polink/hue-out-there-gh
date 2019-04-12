@@ -16,8 +16,8 @@
 #### `main.js`
 
 ### Exported Values and Methods
-* MONGODB_URI
 * PORT=3000
+* MONGODB_URI=mongodb://localhost/testdb
 
 ### Usage Notes and Examples
 *
