@@ -3,12 +3,22 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/signup', (req, res, next) => {
-    res.sendStatus(200);
-})
+const User = require('./user-model');
+
+router.post('/signup', (req, res) => {
+   let user = new User(req.body);
+   return user.save()
+   .then(user => {
+       res.sendStatus(200).send('signup complete BIIIIIIIIITCH');
+
+    }).catch(err => {
+        res.status(400).send('Unable to save');
+    });
+});
 
 router.post('/signin', (req, res, next) => {
-    res.sendStatus(200);
+    console.log('Hello!');
+    // res.sendStatus(200);
 })
 
 module.exports = router;
