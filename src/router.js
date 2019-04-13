@@ -1,26 +1,30 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
+const authRouter = express.Router();
 
 const User = require('./user-model');
+const auth = require('./middleware');
 
-router.post('/signup', (req, res) => {
+authRouter.post('/signup', (req, res, next) => {
 
    let user = new User(req.body);
 
    return user.save()
    .then(user => {
+     req.token = user.generateToken();
+     req.user = user;
+     res.set('token', req.token);
+     res.cookie('auth', req.token);
+     res.send(req.token);
      res.sendStatus(200).send('signup complete.');
-    }).catch(err => {
-        res.status(400).send('Unable to save');
-    });
+    }).catch(next);
 });
 
-router.post('/signin', (req, res) => {
-    console.log(req.body.username);
-    console.log(User.);
+authRouter.post('/signin', auth, (req, res, next) => {
+    res.cookie('auth', req.token);
+    res.send(req.token);
     res.sendStatus(200);
 })
 
-module.exports = router;
+module.exports = authRouter;
