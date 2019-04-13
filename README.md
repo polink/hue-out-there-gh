@@ -18,6 +18,7 @@
 ### Exported Values and Methods
 * PORT=3000
 * MONGODB_URI=mongodb://localhost/testdb
+* SECRET=GUUUUUUUUURRRRRRRLLLLL
 
 ### Usage Notes and Examples
 *
