@@ -7,9 +7,6 @@ let hueScene = hue.scene;
 let host = "172.16.8.233";
 let username = "3RcWD2DoxBwDfmLquhTi8bVpXh7IzhLOw8GpfCe4";
 
-// new instance of api
-let api = new HueApi(host, username);
-
 
 let lightState = require('node-hue-api').lightState;
 
@@ -26,23 +23,14 @@ var displayError = function(err) {
 let sceneId =  "60VeO3KNkG1aec9";
 let state = lightState.create();
 
+// new instance of api
+let api = new HueApi(host, username);
 
-////////////////////CREATING A SCENE////////////////////////////
-let sceneName  = "My New Scene",
-    lightIds = 0;
-let myNewScene = "qV9JSVRuTEyE6ZP";
 
-// using a promise to create a scene
-api.createBasicScene(lightIds, sceneName)
+// creating a group
+api.groups()
     .then(displayResults)
-    .done();
-
-// this calls the scene setting
-api.activateScene(myNewScene)
-    .then(displayResults)
-    .done();
-//////////////////////////////////////////////////////////////
-
+    .done()
 
 // // command line execution
 // const myArgs = process.argv.slice(2);
@@ -107,11 +95,6 @@ api.activateScene(myNewScene)
 //         console.log('Sorry, invalid method');
 //
 // }
-
-
-
-
-
 
 
 
