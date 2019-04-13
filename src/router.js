@@ -19,7 +19,7 @@ router.post('/signup', (req, res) => {
 
 router.post('/signin', (req, res) => {
     console.log(req.body.username);
-    console.log(User.);
+    console.log(User);
     res.sendStatus(200);
 })
 
