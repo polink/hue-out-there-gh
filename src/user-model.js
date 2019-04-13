@@ -10,7 +10,7 @@ const user = new mongoose.Schema({
 });
 
 user.pre('save', function(next) {
-  bcrypt.hash(this.password,10);
+  bcrypt.hash(this.password,10)
     .then(hashedPassword => {
       this.password = hashedPassword;
       next();
@@ -25,7 +25,7 @@ user.statics.authenticateBasic = function(auth) {
 };
 
 user.methods.comparePassword = function(password) {
-  return bcrypt.compare(password, this.password);
+  return bcrypt.compare(password, this.password)
     .then(valid => valid ? this : null);
 };
 

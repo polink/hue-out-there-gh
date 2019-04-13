@@ -1,18 +1,24 @@
 'use strict';
 
-const server = require('../app.js').server; // change js file if we name it different
-// const supergoose = require('../supergoose.js'); // need this too?
-const supertest = require('supertest');
-const mockRequest = supertest.server(server);
+const server = require('../app.js').server;
+const supergoose = require('./supergoose');
+const jwt = require('jsonwebtoken');
+const mockRequest = supergoose.server(server);
+
+beforeAll(supergoose.startDB);
+afterAll(supergoose.stopDB);
 
 describe('Testing /signin and /signup', () => {
     let username = {username: username, password: password};
+
+    let encodeToken;
+    let id;
 
     test('/signup', () => {
        return mockRequest.post('/signup')
             .send(username)
             .then(results => {
-            //    going to figure this out after our schema is established
+               let token = jwt.verify(results.text,);
                 expect().toBe(username);
             })
     });

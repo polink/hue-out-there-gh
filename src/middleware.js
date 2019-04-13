@@ -5,7 +5,7 @@ const User = require('./user-model');
 module.exports = (req, res, next) => {
 
   try {
-
+    console.log(req.headers);
     let [authType, encodedString] = req.headers.authorization.split(/\s+/);
 
     //BASIC Authorization
