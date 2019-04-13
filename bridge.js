@@ -38,16 +38,16 @@ switch(myArgs[0]) {
             .fail(displayError)
             .done();
         break;
-    // you can run: 'node bridge.js 3on'
-    case '3on':
-        api.setLightState(3, state.on())
+    // you can run: 'node bridge.js 6on'
+    case '6on':
+        api.setLightState(6, state.on())
             .then(displayResults)
             .fail(displayError)
             .done();
         break;
-    // you can run: 'node bridge.js 4on'
-    case '4on':
-        api.setLightState(4, state.on())
+    // you can run: 'node bridge.js 7on'
+    case '7on':
+        api.setLightState(7, state.on())
             .then(displayResults)
             .fail(displayError)
             .done();
@@ -66,16 +66,16 @@ switch(myArgs[0]) {
             .fail(displayError)
             .done();
         break;
-    // you can run: 'node bridge.js 3off'
-    case '3off':
-        api.setLightState(3, state.off())
+    // you can run: 'node bridge.js 6off'
+    case '6off':
+        api.setLightState(6, state.off())
             .then(displayResults)
             .fail(displayError)
             .done();
         break;
-    // you can run: 'node bridge.js 4off'
-    case '4off':
-        api.setLightState(4, state.off())
+    // you can run: 'node bridge.js 7off'
+    case '7off':
+        api.setLightState(7, state.off())
             .then(displayResults)
             .fail(displayError)
             .done();
