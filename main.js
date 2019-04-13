@@ -9,6 +9,6 @@ const options = {
   useCreateIndex: true,
 };
 
-mongoose.connect(process.env.MONGODB_URI, options)
+mongoose.connect(process.env.MONGODB_URI, options);
 
 require('./app.js').start(process.env.PORT);

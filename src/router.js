@@ -17,14 +17,14 @@ authRouter.post('/signup', (req, res, next) => {
      res.set('token', req.token);
      res.cookie('auth', req.token);
      res.send(req.token);
-     res.sendStatus(200).send('signup complete.');
+
     }).catch(next);
 });
 
 authRouter.post('/signin', auth, (req, res, next) => {
     res.cookie('auth', req.token);
     res.send(req.token);
-    res.sendStatus(200);
-})
+
+});
 
 module.exports = authRouter;
