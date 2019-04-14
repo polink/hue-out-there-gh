@@ -8,7 +8,7 @@ const mockRequest = supergoose.server(server);
 beforeAll(supergoose.startDB);
 afterAll(supergoose.stopDB);
 
-describe('Testing 404 and error middleware', () => {
+describe('Testing 404 and error middle', () => {
     let user = {username: 'username', password: 'password'};
 
     let encodeToken;
