@@ -2,23 +2,43 @@
 
 let hue = require('node-hue-api');
 let HueApi = hue.HueApi;
+let hueScene = hue.scene;
 
-let huescene = hue.scene
+let host = "172.16.8.233";
+let username = "3RcWD2DoxBwDfmLquhTi8bVpXh7IzhLOw8GpfCe4";
+
+
 let lightState = require('node-hue-api').lightState;
 
 let displayResults = function(result) {
     console.log(JSON.stringify(result, null, 2))
 };
 
-var displayError = function(err) {
+
+let displayError = function(err) {
     console.error(err);
 };
 
-let host = "172.16.8.233";
-let username = "3RcWD2DoxBwDfmLquhTi8bVpXh7IzhLOw8GpfCe4";
-let api = new HueApi(host, username);
+
 let sceneId =  "60VeO3KNkG1aec9";
 let state = lightState.create();
+
+// new instance of api
+let api = new HueApi(host, username);
+
+
+// creating a group
+api.createGroup("a new group", [1, 2, 6, 7])
+    .then(displayResults)
+    .done();
+
+state = lightState.create().off();
+
+// Set the lamp with id '2' to on
+api.setGroupLightState(4, state.on())
+    .then(displayResults)
+    .fail(displayError)
+    .done();
 
 
 // command line execution
@@ -31,21 +51,21 @@ switch(myArgs[0]) {
             .fail(displayError)
             .done();
         break;
-        // you can run: 'node bridge.js 2on'
+    // you can run: 'node bridge.js 2on'
     case '2on':
         api.setLightState(2, state.on())
             .then(displayResults)
             .fail(displayError)
             .done();
         break;
-    // you can run: 'node bridge.js 6on'
+    // you can run: 'node bridge.js 3on'
     case '6on':
         api.setLightState(6, state.on())
             .then(displayResults)
             .fail(displayError)
             .done();
         break;
-    // you can run: 'node bridge.js 7on'
+    // you can run: 'node bridge.js 4on'
     case '7on':
         api.setLightState(7, state.on())
             .then(displayResults)
@@ -64,16 +84,16 @@ switch(myArgs[0]) {
         api.setLightState(2, state.off())
             .then(displayResults)
             .fail(displayError)
-            .done();
+            .done()
         break;
-    // you can run: 'node bridge.js 6off'
+    // you can run: 'node bridge.js 3off'
     case '6off':
         api.setLightState(6, state.off())
             .then(displayResults)
             .fail(displayError)
             .done();
         break;
-    // you can run: 'node bridge.js 7off'
+    // you can run: 'node bridge.js 4off'
     case '7off':
         api.setLightState(7, state.off())
             .then(displayResults)
@@ -84,3 +104,6 @@ switch(myArgs[0]) {
         console.log('Sorry, invalid method');
 
 }
+
+
+
