@@ -20,6 +20,9 @@ let displayError = function(err) {
 };
 
 
+// command line execution
+const myArgs = process.argv.slice(2);
+
 let sceneId =  "60VeO3KNkG1aec9";
 let state = lightState.create();
 
@@ -32,17 +35,7 @@ api.createGroup("a new group", [1, 2, 6, 7])
     .then(displayResults)
     .done();
 
-state = lightState.create().off();
 
-// Set the lamp with id '2' to on
-api.setGroupLightState(4, state.on())
-    .then(displayResults)
-    .fail(displayError)
-    .done();
-
-
-// command line execution
-const myArgs = process.argv.slice(2);
 // you can run: 'node bridge.js 1on'
 switch(myArgs[0]) {
     case '1on':
@@ -100,6 +93,17 @@ switch(myArgs[0]) {
             .fail(displayError)
             .done();
         break;
+    case 'groupon':
+        api.setGroupLightState(4, state.on())
+            .then(displayResults)
+            .fail(displayError)
+            .done();
+        break;
+    case 'groupoff':
+        api.setGroupLightState(4, state.off())
+            .then(displayResults)
+            .fail(displayError)
+            .done();
     default:
         console.log('Sorry, invalid method');
 

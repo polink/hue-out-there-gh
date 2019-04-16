@@ -22,6 +22,7 @@ app.use(routes);
 app.use(notFound);
 app.use(errorHandler);
 
+
 // if server is already running
 let isRunning = false;
 
