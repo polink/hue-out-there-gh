@@ -38,7 +38,7 @@ api.createGroup("a new group", [1, 2, 6, 7])
 
 // you can run: 'node bridge.js 1on'
 switch(myArgs[0]) {
-    case '1on':
+    case '1on'://`${id}on`
         api.setLightState(1, state.on())
             .then(displayResults)
             .fail(displayError)
@@ -77,7 +77,7 @@ switch(myArgs[0]) {
         api.setLightState(2, state.off())
             .then(displayResults)
             .fail(displayError)
-            .done()
+            .done();
         break;
     // you can run: 'node bridge.js 3off'
     case '6off':
