@@ -17,7 +17,7 @@ authRouter.post('/signup', (req, res, next) => {
      res.set('token', req.token);
      res.cookie('auth', req.token);
      res.send(req.token);
-
+     res.send()
     }).catch(next);
 });
 

@@ -35,9 +35,9 @@ api.createGroup("a new group", [1, 2, 6, 7])
     .then(displayResults)
     .done();
 
-
+function lightOp(param = myArgs[0]) {
 // you can run: 'node bridge.js 1on'
-switch(myArgs[0]) {
+switch(param) {
     case '1on':
         api.setLightState(1, state.on())
             .then(displayResults)
@@ -93,12 +93,14 @@ switch(myArgs[0]) {
             .fail(displayError)
             .done();
         break;
+    // turn all lights on
     case 'groupon':
         api.setGroupLightState(4, state.on())
             .then(displayResults)
             .fail(displayError)
             .done();
         break;
+    // turn all lights on
     case 'groupoff':
         api.setGroupLightState(4, state.off())
             .then(displayResults)
@@ -106,8 +108,10 @@ switch(myArgs[0]) {
             .done();
     default:
         console.log('Sorry, invalid method');
-
+    }
 }
+
+lightOp(myArgs[0])
 
 
 
