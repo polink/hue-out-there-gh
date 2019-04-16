@@ -8,11 +8,12 @@ const mockRequest = supergoose.server(server);
 beforeAll(supergoose.startDB);
 afterAll(supergoose.stopDB);
 
-describe('Testing 404 and error middleware', () => {
+describe('Testing 404 and error middle', () => {
     let user = {username: 'username', password: 'password'};
 
     let encodeToken;
     let id;
+    let errorObject = {error: 'Resource Not Found'};
 
     test('/signup', () => {
         return mockRequest.post('/signup')
@@ -24,4 +25,13 @@ describe('Testing 404 and error middleware', () => {
                 expect(id).toBeTruthy();
             })
     });
+
+  test('404 testing', () => {
+    return mockRequest.post('/signin')
+      .auth({username: 'username1', password: '1234'})
+      .then(() => {
+        console.log(jest.fn());
+        expect(jest.fn()).toHaveBeenCalledWith(errorObject);
+      })
+  });
 });
