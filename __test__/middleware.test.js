@@ -3,6 +3,7 @@
 const server = require('../app.js').server;
 const supergoose = require('./supergoose');
 const jwt = require('jsonwebtoken');
+const auth = require('../src/middleware.js');
 const mockRequest = supergoose.server(server);
 
 beforeAll(supergoose.startDB);
@@ -13,7 +14,7 @@ describe('Testing 404 and error middle', () => {
 
     let encodeToken;
     let id;
-    let errorObject = {error: 'Resource Not Found'};
+    let errorObject = {status: 401, statusMessage: 'Unauthorized', message: 'Invalid User ID/Password'};
 
     test('/signup', () => {
         return mockRequest.post('/signup')
@@ -27,11 +28,19 @@ describe('Testing 404 and error middle', () => {
     });
 
   test('404 testing', () => {
-    return mockRequest.post('/signin')
-      .auth({username: 'username1', password: '1234'})
+    let req = {
+      headers: {
+        authorization: 'Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ',
+      },
+    };
+
+    let res = {};
+    let next = jest.fn();
+    let middleware = auth;
+
+    return middleware (req, res, next)
       .then(() => {
-        console.log(jest.fn());
-        expect(jest.fn()).toHaveBeenCalledWith(errorObject);
+        expect(next).toHaveBeenCalledWith(errorObject);
       })
   });
 });
