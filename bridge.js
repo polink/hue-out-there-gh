@@ -35,7 +35,7 @@ api.createGroup("a new group", [1, 2, 6, 7])
     .then(displayResults)
     .done();
 
-function lightOp(param = myArgs[0]) {
+function lightOp(param = myArgs[0]+myArgs[1]) {
 // you can run: 'node bridge.js 1on'
 switch(param) {
     case '1on':
