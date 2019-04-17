@@ -19,13 +19,6 @@ const user = new mongoose.Schema({
   password: {type:String, required:true}
 });
 
-user.virtual('lightBulbs', {
-  id: [1, 2, 6, 7],
-})
-
-user.pre('find', function() {
-  this.populate('')
-})
 /**
  * Hashes given password.
  */
