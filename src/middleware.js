@@ -1,5 +1,6 @@
 'use strict';
 
+/** Single Dependency - user model */
 const User = require('./user-model');
 
 module.exports = (req, res, next) => {
@@ -7,7 +8,6 @@ module.exports = (req, res, next) => {
   try {
     let [authType, encodedString] = req.headers.authorization.split(/\s+/);
 
-    //BASIC Authorization
     switch (authType.toLowerCase()) {
       case 'basic':
         return _authBasic(encodedString);
@@ -19,6 +19,12 @@ module.exports = (req, res, next) => {
     next(err);
   }
 
+  /**
+   * This function runs Basic Authenticaton hashing on a given username and password.
+   * @param authString - passes string that contains username and password.
+   * @returns {boolean}
+   * @private
+   */
   function _authBasic(authString) {
 
     let base64Buffer = Buffer.from(authString, 'base64');
@@ -30,6 +36,12 @@ module.exports = (req, res, next) => {
       .then (user => _authenticate(user));
   }
 
+  /**
+   * Generates a token for this user.
+   * @param user - given user/username that we're working with.
+   * @private
+   */
+
   function _authenticate(user) {
     if(user) {
       req.user = user;
@@ -40,6 +52,12 @@ module.exports = (req, res, next) => {
       _authError();
     }
   }
+
+  /**
+   * Function for outputting an error if an invalid username or password is given.
+   * Purposely nonspecific for better security.
+   * @private
+   */
 
   function _authError() {
     next({status: 401, statusMessage: 'Unauthorized', message: 'Invalid User ID/Password'});
