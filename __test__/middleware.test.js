@@ -27,7 +27,7 @@ describe('Testing 404 and error middle', () => {
             })
     });
 
-  test('404 testing', () => {
+  test('401 testing', () => {
     let req = {
       headers: {
         authorization: 'Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ',
@@ -42,5 +42,23 @@ describe('Testing 404 and error middle', () => {
       .then(() => {
         expect(next).toHaveBeenCalledWith(errorObject);
       })
+  });
+
+  test('404 testing', () => {
+    return mockRequest.post('/signn')
+      .send(user)
+      .then(result => {
+        expect(result.text).toBe("{\"error\":\"Resource Not Found\"}");
+        expect(result.statusCode).toEqual(404);
+      });
+  });
+
+  test('500 testing', () => {
+    return mockRequest.post('/signin')
+      .send({username: 'usernam', password: 'password'})
+      .then(result => {
+        expect(result.text).toBe("{\"error\":{}}");
+        expect(result.statusCode).toEqual(500);
+      });
   });
 });
