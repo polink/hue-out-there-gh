@@ -29,14 +29,14 @@ authRouter.post('/signin', auth, (req, res, next) => {
 });
 
 
-// authRouter.put(`http://172.16.8.233/api/3RcWD2DoxBwDfmLquhTi8bVpXh7IzhLOw8GpfCe4/lights/:id/state`, (req, res) => {
-//         if (err) {
-//             res.send({'error':'An error has occurred'});
-//         } else {
-//             res.send({"on":true} );
-//
-//     }
-// })
+authRouter.get('/light/:id/on', (req, res) => {
+    let id = req.params.id;
+    api.setLightState(id, state.on())
+        .then(displayResults)
+        .fail(displayError)
+        .done();
+    res.send(`Light ${id} Is On`)
+});
 
 
 module.exports = authRouter;

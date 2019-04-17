@@ -4,8 +4,8 @@ let hue = require('node-hue-api');
 let HueApi = hue.HueApi;
 let hueScene = hue.scene;
 
-let host = "172.16.8.233";
-let username = "3RcWD2DoxBwDfmLquhTi8bVpXh7IzhLOw8GpfCe4";
+let host = process.env.BRIDGE_IP_ADDRESS;
+let username = process.env.USERNAME;
 
 
 let lightState = require('node-hue-api').lightState;
