@@ -63,6 +63,7 @@ switch(onOrOff) {
             .then(displayResults)
             .fail(displayError)
             .done();
+        break;
     default:
         console.log('Sorry, invalid method');
 }

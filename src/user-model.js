@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
-/**
+  /**
  * Creates 'user' as a new mongo schema, and defines types for username and password.
  * @type {mongoose.Schema}
  */
@@ -19,6 +19,13 @@ const user = new mongoose.Schema({
   password: {type:String, required:true}
 });
 
+user.virtual('lightBulbs', {
+  id: [1, 2, 6, 7],
+})
+
+user.pre('find', function() {
+  this.populate('')
+})
 /**
  * Hashes given password.
  */
@@ -62,6 +69,7 @@ user.methods.generateToken = function() {
   };
   return jwt.sign(tokenData, process.env.SECRET);
 };
+
 
 /**
  * Exports user-model for use outside of this file.
