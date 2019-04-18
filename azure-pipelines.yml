@@ -5,12 +5,15 @@
 
 trigger:
 - deploy
+- task: UseNode@1
+  inputs:
+    checkLatest: true
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
 - script: |
-    npm test
+    npm run test
     npm run lint
   displayName: 'Run our project tests'
