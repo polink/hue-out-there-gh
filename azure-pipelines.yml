@@ -17,6 +17,7 @@ steps:
 
 - script: |
     npm install
+    npm run dbOn
     npm run build
     npm test
   displayName: 'npm install and build and test'
