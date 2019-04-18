@@ -31,4 +31,14 @@ authRouter.post('/signin', auth, (req, res, next) => {
 });
 
 
+authRouter.get('/light/:id/on', (req, res) => {
+    let id = req.params.id;
+    api.setLightState(id, state.on())
+        .then(displayResults)
+        .fail(displayError)
+        .done();
+    res.send(`Light ${id} Is On`)
+});
+
+
 module.exports = authRouter;
