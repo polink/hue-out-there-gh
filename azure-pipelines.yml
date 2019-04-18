@@ -5,15 +5,22 @@
 
 trigger:
 - deploy
-- task: UseNode@1
-  inputs:
-    checkLatest: true
+
+
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- script: |
-    npm run test
-    npm run lint
+- task: UseNode@1
+  inputs:
+    checkLatest: true
+    
+- script: jest test --reporter jest-junit-reporter
   displayName: 'Run our project tests'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: JUnit
+    testResultsFiles: '**/TEST-RESULTS.xml'
