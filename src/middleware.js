@@ -3,8 +3,12 @@
 /** Single Dependency - user model */
 const User = require('./user-model');
 
+/** Most of this middleware file is exported for use in the rest of the project. */
 module.exports = (req, res, next) => {
 
+  /**
+   * This part makes the headers for our Basic Authorization
+   */
   try {
     let [authType, encodedString] = req.headers.authorization.split(/\s+/);
 

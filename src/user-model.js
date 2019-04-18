@@ -1,8 +1,10 @@
 'use strict';
 
-/**
- * DEPENDENCIES - mongoose, jsonwebtoken, bcrypt
- * also requires dotenv
+/** NODE PACKAGES
+ * Mongoose
+ * Jsonwebtoken
+ * Bcrypt
+ * Dotenv
  */
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
@@ -19,9 +21,7 @@ const user = new mongoose.Schema({
   password: {type:String, required:true}
 });
 
-/**
- * Hashes given password.
- */
+/** Hashes given password. */
 user.pre('save', function(next) {
   bcrypt.hash(this.password,10)
     .then(hashedPassword => {
