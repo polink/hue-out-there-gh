@@ -11,9 +11,10 @@ pool:
 
 steps:
     
-- script: #jest test --reporter jest-junit-reporter
-    ./node_modules/.bin/jest --coverage
-  displayName: 'Run our project tests'
+- script: |
+    npm install
+    jest test --reporter jest-junit-reporter
+  displayName: 'Install our node packs and run our project tests'
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
