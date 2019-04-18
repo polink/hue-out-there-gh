@@ -6,18 +6,13 @@
 trigger:
 - deploy
 
-
-
 pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- task: UseNode@1
-  inputs:
-    checkLatest: true
     
 - script: #jest test --reporter jest-junit-reporter
-    npm run test
+    ./node_modules/.bin/jest --coverage
   displayName: 'Run our project tests'
 
 - task: PublishTestResults@2
