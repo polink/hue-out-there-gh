@@ -10,8 +10,10 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-    
+  
 - script: |
+  
+  workingDirectory: ./node_modules.bin/jest
     npm install jest
     jest test --reporter jest-junit-reporter
   displayName: 'Install our node packs and run our project tests'
