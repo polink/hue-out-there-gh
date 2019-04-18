@@ -10,12 +10,16 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-  
-- script: >
-    npm install jest
-  workingDirectory: ./node_modules/.bin/jest
-    jest test --reporter jest-junit-reporter
-  displayName: 'Install our node packs and run our project tests'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+    npm test
+  displayName: 'npm install and build and test'
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
