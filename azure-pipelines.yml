@@ -17,7 +17,7 @@ steps:
     checkLatest: true
     
 - script: #jest test --reporter jest-junit-reporter
-    npm run TEST
+    npm run test
   displayName: 'Run our project tests'
 
 - task: PublishTestResults@2
