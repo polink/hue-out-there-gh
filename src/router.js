@@ -2,9 +2,12 @@
 
 const express = require('express');
 const authRouter = express.Router();
+const lightState = require('node-hue-api').lightState;
 
 const User = require('./user-model');
 const auth = require('./middleware');
+const light = require('../bridge');
+let state = lightState.create();
 
 authRouter.post('/signup', (req, res, next) => {
 
@@ -21,24 +24,36 @@ authRouter.post('/signup', (req, res, next) => {
     }).catch(next);
 });
 
-
 authRouter.post('/signin', auth, (req, res, next) => {
     res.cookie('auth', req.token);
-    res.send(`Hello ${req.user.username}! \n\n Below Are Directions \n\n Turn On Lights \n 1 - "node bridge.js 1on"
- 2 - "node bridge.js 2on" \n 6 - "node bridge.js 6on" \n\n Turn Off Lights \n 1 - "node bridge.js 1off" 
- 2 - "node bridge.js 2off" \n 6 - "node bridge.js 6off" \n\n Turn On All Lights - "node bridge.js groupon" 
-    \n Turn Off All Lights"node bridge.js groupoff"`);
+    res.send(`Hello ${req.user.username}! \n\n Below Are Directions for light IDs. Replace "id" with these numbers: 1,2,6,7 
+\n Turn On Lights - "http get :3000/light/id/on"
+\n Turn Off Lights - "http get :3000/light/id/off"
+\n Turn On All Lights - "http get :3000/lightgroup/on"
+\n Turn Off All Lights- "http get :3000/lightgroup/off"`);
 });
 
 
-authRouter.get('/light/:id/on', (req, res) => {
-    let id = req.params.id;
-    api.setLightState(id, state.on())
-        .then(displayResults)
-        .fail(displayError)
-        .done();
-    res.send(`Light ${id} Is On`)
+authRouter.get('/light/:id/on', (req, res, next) => {
+    let bulb = req.params.id;
+    light.lightOnOff(bulb, state.on());
+    res.send(`Light ${bulb} Is On`)
 });
 
+authRouter.get('/light/:id/off', (req, res, next) => {
+  let bulb = req.params.id;
+  light.lightOnOff(bulb, state.off());
+  res.send(`Light ${bulb} Is On`)
+});
+
+authRouter.get('/lightgroup/on', (req, res, next) => {
+  light.lightGroup(4, state.on());
+  res.send(`All lights are on`)
+});
+
+authRouter.get('/lightgroup/off', (req, res, next) => {
+  light.lightGroup(4, state.off());
+  res.send(`All lights are off`)
+});
 
 module.exports = authRouter;
