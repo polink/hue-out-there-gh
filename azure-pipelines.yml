@@ -16,7 +16,7 @@ steps:
   inputs:
     checkLatest: true
     
-- script: jest test --reporter jest-junit-reporter
+- script: #jest test --reporter jest-junit-reporter
     npm run TEST
   displayName: 'Run our project tests'
 
