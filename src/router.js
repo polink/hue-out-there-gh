@@ -43,7 +43,7 @@ authRouter.get('/light/:id/on', (req, res, next) => {
 authRouter.get('/light/:id/off', (req, res, next) => {
   let bulb = req.params.id;
   light.lightOnOff(bulb, state.off());
-  res.send(`Light ${bulb} Is On`)
+  res.send(`Light ${bulb} Is Off`)
 });
 
 authRouter.get('/lightgroup/on', (req, res, next) => {
