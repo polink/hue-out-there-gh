@@ -12,7 +12,8 @@
     "dbOff": "killall mongod"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testResultsProcessor": "./node_modules/jest-junit-reporter"
   },
   "keywords": [],
   "author": "",
@@ -35,5 +36,8 @@
     "require-directory": "^2.1.1",
     "supertest": "^3.3.0",
     "swagger-ui-express": "^4.0.2"
+  },
+  "devDependencies": {
+    "jest-junit-reporter": "^1.1.0"
   }
 }
