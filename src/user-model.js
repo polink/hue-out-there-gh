@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
-  /**
+/**
  * Creates 'user' as a new mongo schema, and defines types for username and password.
  * @type {mongoose.Schema}
  */
