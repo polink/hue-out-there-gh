@@ -20,17 +20,17 @@ describe('testing bridge functionality', () => {
         })
   });
 
-  test('testing group light off', () => {
-    return mockClient.get('/lightgroup/off')
-      .then(result => {
-        expect(result.text).toEqual('All lights are off');
-      })
-});
-
   test('testing group light on', () => {
     return mockClient.get('/lightgroup/on')
         .then(result => {
           expect(result.text).toEqual('All lights are on');
         })
   });
+
+  test('testing group light off', () => {
+    return mockClient.get('/lightgroup/off')
+      .then(result => {
+        expect(result.text).toEqual('All lights are off');
+      })
+});
 });
