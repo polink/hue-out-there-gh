@@ -2,7 +2,7 @@
 ==============================================
 
 ## 401 JavaScript N12 - Midterm Project
-[![Build Status](https://dev.azure.com/consultations/hue_out_there/_apis/build/status/hue_out_there?branchName=master)](https://dev.azure.com/consultations/hue_out_there/_build/latest?definitionId=1&branchName=development)
+[![Build Status](https://dev.azure.com/consultations/hue_out_there/_apis/build/status/hue_out_there?branchName=development)](https://dev.azure.com/consultations/hue_out_there/_build/latest?definitionId=1&branchName=development)
 
 ### Author: Sarkis Aghazarian, Alistair Blake, Jessica Elliott, Erik Johnson, Karl Polintan, Anthony Triplett
 
