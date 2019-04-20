@@ -1,34 +1,37 @@
 'use strict';
 
-//bridge related
+/** Single Dependency - API for Bridge */
 let hue = require('node-hue-api');
 
+/**
+ * Connecting to specific bridge, username is unique.
+ */
 let HueApi = hue.HueApi;
-// let hueScene = hue.scene;
 let host = "172.16.8.233";
 let username = "3RcWD2DoxBwDfmLquhTi8bVpXh7IzhLOw8GpfCe4";
 let api = new HueApi(host, username);
 
-const displayResults = function(result) {
-    console.log(JSON.stringify(result, null, 2))
-};
-
+/**
+ * If return from API is an error
+ * @param err - Error
+ */
 const displayError = function(err) {
     console.error(err);
 };
 
+/** Status (On/Off) Check of Lightbulbs by Id */
 const lightOnOff = (lightNum, status) => {
     api.setLightState(lightNum, status)
-        .then(displayResults)
         .fail(displayError)
         .done();
 };
 
+/** Status (On/Off) Check of LightGroup */
 const lightGroup = (lightNum, status) => {
-            api.setGroupLightState(lightNum, status)
-            .then(displayResults)
-            .fail(displayError)
-            .done();
+    api.setGroupLightState(lightNum, status)
+        .fail(displayError)
+        .done();
 };
 
+/** Exports status' outside of file */
 module.exports = {lightOnOff,lightGroup};

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: middleware/error.js</title>
+    <title>JSDoc: Source: app.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: middleware/error.js</h1>
+    <h1 class="page-title">Source: app.js</h1>
 
     
 
@@ -27,19 +27,54 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>'use strict';
+/** NODE PACKAGES
+ * Express
+ * Cors
+ * Morgan
+ */
+const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
+
+/** Dependency Files */
+const routes = require('./router');
+const errorHandler = require('./middleware/error');
+const notFound = require('./middleware/404');
+
+
+/** Running app middleware */
+const app = express();
+app.use(cors());
+app.use(morgan('dev'));
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+app.use(routes);
+app.use(notFound);
+app.use(errorHandler);
 
 /**
- * This sends out a 500 server error to our server.
+ * isRunning &amp; exported code
+ * @type {boolean} This checks if the server is already running
  */
+let isRunning = false;
 
-module.exports = (err, req, res, next) => {
-    let error = {error: err};
-    res.statusCode = 500;
-    res.statusMessage = 'Server error';
-    res.setHeader('Content-Type', 'application/json');
-    res.write(JSON.stringify(error));
-    res.end();
-};</code></pre>
+module.exports = {
+  server: app,
+  start: (port) => {
+    if (!isRunning) {
+      app.listen(port, () => {
+        isRunning = true;
+        console.log(`server Up on ${port}`);
+      });
+    } else {
+      console.log('Server is already running');
+    }
+  },
+};
+
+</code></pre>
         </article>
     </section>
 

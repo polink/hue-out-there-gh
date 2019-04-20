@@ -9,9 +9,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 /** Dependency Files */
-const routes = require('./src/router');
-const errorHandler = require('./src/middleware/error');
-const notFound = require('./src/middleware/404');
+const routes = require('./router');
+const errorHandler = require('./middleware/error');
+const notFound = require('./middleware/404');
 
 
 /** Running app middleware */

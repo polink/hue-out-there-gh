@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: middleware/error.js</title>
+    <title>JSDoc: Source: bridge.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: middleware/error.js</h1>
+    <h1 class="page-title">Source: bridge.js</h1>
 
     
 
@@ -28,18 +28,42 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict';
 
-/**
- * This sends out a 500 server error to our server.
- */
+/** Single Dependency - API for Bridge */
+let hue = require('node-hue-api');
 
-module.exports = (err, req, res, next) => {
-    let error = {error: err};
-    res.statusCode = 500;
-    res.statusMessage = 'Server error';
-    res.setHeader('Content-Type', 'application/json');
-    res.write(JSON.stringify(error));
-    res.end();
-};</code></pre>
+/**
+ * Connecting to specific bridge, username is unique.
+ */
+let HueApi = hue.HueApi;
+let host = "172.16.8.233";
+let username = "3RcWD2DoxBwDfmLquhTi8bVpXh7IzhLOw8GpfCe4";
+let api = new HueApi(host, username);
+
+/**
+ * If return from API is an error
+ * @param err - Error
+ */
+const displayError = function(err) {
+    console.error(err);
+};
+
+/** Status (On/Off) Check of Lightbulbs by Id */
+const lightOnOff = (lightNum, status) => {
+    api.setLightState(lightNum, status)
+        .fail(displayError)
+        .done();
+};
+
+/** Status (On/Off) Check of LightGroup */
+const lightGroup = (lightNum, status) => {
+    api.setGroupLightState(lightNum, status)
+        .fail(displayError)
+        .done();
+};
+
+/** Exports status' outside of file */
+module.exports = {lightOnOff,lightGroup};
+</code></pre>
         </article>
     </section>
 

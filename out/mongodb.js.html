@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: middleware/error.js</title>
+    <title>JSDoc: Source: mongodb.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: middleware/error.js</h1>
+    <h1 class="page-title">Source: mongodb.js</h1>
 
     
 
@@ -28,18 +28,50 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict';
 
-/**
- * This sends out a 500 server error to our server.
+
+const options = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+};
+
+/** NODE PACKAGES
+ * Dotenv
+ * Mongoose
  */
 
-module.exports = (err, req, res, next) => {
-    let error = {error: err};
-    res.statusCode = 500;
-    res.statusMessage = 'Server error';
-    res.setHeader('Content-Type', 'application/json');
-    res.write(JSON.stringify(error));
-    res.end();
-};</code></pre>
+require('dotenv').config();
+
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI, options);
+
+
+/** Connects Mongoose to the Mongo DB */
+let db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', function() {
+    console.log("Connection Successful!");
+});
+
+/** Creates a new schema for the lights */
+let lightsSchema = mongoose.Schema({
+    group_name:{type: String, required: true},
+    single_name:{type: String, required: true}
+})
+
+let lightSet = mongoose.model('lightSet', lightsSchema);
+
+/** Establishes a group of lights */
+let lightBulbs = new lightSet({group_name:'midterm', single_name:'larry'});
+
+/** Save function with error handler */
+lightBulbs.save(function (err, light) {
+    if (err) return console.error(err);
+    console.log(light.id + " saved to lights collection.");
+});
+
+</code></pre>
         </article>
     </section>
 

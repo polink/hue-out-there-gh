@@ -1,14 +1,20 @@
 'use strict';
 
+/** NODE PACKAGES
+ * Express
+ */
+
 const express = require('express');
 const authRouter = express.Router();
 const lightState = require('node-hue-api').lightState;
 
 const User = require('./user-model');
 const auth = require('./middleware');
-const light = require('../bridge');
+const light = require('./bridge');
 let state = lightState.create();
 
+
+/** POST methods for SignUp and SignIn */
 authRouter.post('/signup', (req, res, next) => {
 
    let user = new User(req.body);
@@ -33,6 +39,7 @@ authRouter.post('/signin', auth, (req, res, next) => {
 \n Turn Off All Lights- "http get :3000/lightgroup/off"`);
 });
 
+/** GET methods for turning on/off with specific Lightbulb Id.*/
 
 authRouter.get('/light/:id/on', (req, res, next) => {
     let bulb = req.params.id;
@@ -45,6 +52,8 @@ authRouter.get('/light/:id/off', (req, res, next) => {
   light.lightOnOff(bulb, state.off());
   res.send(`Light ${bulb} Is On`)
 });
+
+/** GET methods for turning on/off Lightgroup.*/
 
 authRouter.get('/lightgroup/on', (req, res, next) => {
   light.lightGroup(4, state.on());
