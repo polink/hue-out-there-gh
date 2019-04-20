@@ -1,7 +1,7 @@
 'use strict';
 
 const supertest = require('supertest');
-const {server} = require('../app');
+const {server} = require('../src/app');
 const mockClient = supertest(server);
 
 describe('testing bridge functionality', () => {
